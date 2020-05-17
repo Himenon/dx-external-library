@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(["React"], factory);
 	else if(typeof exports === 'object')
-		exports["MyExternal"] = factory(require("React"));
+		exports["PrivateComponent"] = factory(require("React"));
 	else
-		root["MyExternal"] = factory(root["React"]);
+		root["MyExternal"] = root["MyExternal"] || {}, root["MyExternal"]["PrivateComponent"] = factory(root["React"]);
 })(window, function(__WEBPACK_EXTERNAL_MODULE_react__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -91,44 +91,32 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.tsx");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/PrivateComponent/index.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/Components/Hey.tsx":
-/*!********************************!*\
-  !*** ./src/Components/Hey.tsx ***!
-  \********************************/
+/***/ "./src/PrivateComponent/Panel.tsx":
+/*!****************************************!*\
+  !*** ./src/PrivateComponent/Panel.tsx ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.Component = void 0;\nconst React = __webpack_require__(/*! react */ \"react\");\nexports.Component = (props) => {\n    return React.createElement(\"p\", null, \"Hey\");\n};\n\n\n//# sourceURL=webpack://MyExternal/./src/Components/Hey.tsx?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.Component = void 0;\nconst React = __webpack_require__(/*! react */ \"react\");\nexports.Component = (props) => {\n    return (React.createElement(\"p\", null, props.title));\n};\n\n\n//# sourceURL=webpack://MyExternal.%5Bname%5D/./src/PrivateComponent/Panel.tsx?");
 
 /***/ }),
 
-/***/ "./src/Components/index.tsx":
-/*!**********************************!*\
-  !*** ./src/Components/index.tsx ***!
-  \**********************************/
+/***/ "./src/PrivateComponent/index.ts":
+/*!***************************************!*\
+  !*** ./src/PrivateComponent/index.ts ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.Hey = void 0;\nconst Hey = __webpack_require__(/*! ./Hey */ \"./src/Components/Hey.tsx\");\nexports.Hey = Hey;\n\n\n//# sourceURL=webpack://MyExternal/./src/Components/index.tsx?");
-
-/***/ }),
-
-/***/ "./src/index.tsx":
-/*!***********************!*\
-  !*** ./src/index.tsx ***!
-  \***********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.Component = void 0;\nconst Component = __webpack_require__(/*! ./Components */ \"./src/Components/index.tsx\");\nexports.Component = Component;\n\n\n//# sourceURL=webpack://MyExternal/./src/index.tsx?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.Panel = __webpack_require__(/*! ./Panel */ \"./src/PrivateComponent/Panel.tsx\");\n\n\n//# sourceURL=webpack://MyExternal.%5Bname%5D/./src/PrivateComponent/index.ts?");
 
 /***/ }),
 
@@ -139,7 +127,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexport
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("module.exports = __WEBPACK_EXTERNAL_MODULE_react__;\n\n//# sourceURL=webpack://MyExternal/external_%22React%22?");
+eval("module.exports = __WEBPACK_EXTERNAL_MODULE_react__;\n\n//# sourceURL=webpack://MyExternal.%5Bname%5D/external_%22React%22?");
 
 /***/ })
 

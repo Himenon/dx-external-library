@@ -2,8 +2,8 @@
   "name": "my-external",
   "version": "1.0.0",
   "license": "MIT",
-  "typings": "./dist/application.d.ts",
-  "main": "./dist/application.production.js",
+  "typings": "./index.d.ts",
+  "main": "./index.js",
   "scripts": {
     "build": "yarn build:webpack && yarn build:dts",
     "build:webpack": "webpack --config webpack.config.js",

@@ -7,15 +7,17 @@ module.exports = {
   mode: "development",
   target: "web",
   entry: {
-    "application.production": "./src/index.tsx",
+    "PrivateComponent": "./src/PrivateComponent/index.ts",
+    "Component": "./src/Component/index.ts"
   },
   plugins: [
     new CleanWebpackPlugin(),
   ],
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "umd"),
     filename: "[name].js",
-    library: "MyExternal", // externalsのvalueの値になる
+    // https://github.com/webpack/webpack/tree/master/examples/multi-part-library#webpackconfigjs
+    library: ["MyExternal", "[name]"], // externalsのvalueの値になる
     libraryTarget: "umd",  // ブラウザのライブラリとして利用する場合に必要
   },
   externals: {

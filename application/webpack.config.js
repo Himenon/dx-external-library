@@ -81,7 +81,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "[name].js",
+    filename: "scripts/[name].js",
   },
   externals: Object.keys(externalAssets).reduce(
     (all, current) => ({

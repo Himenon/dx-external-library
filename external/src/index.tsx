@@ -1,2 +1,2 @@
-import * as Hey from "./Hey"
-export { Hey };
+import * as Component from "./Components";
+export { Component };

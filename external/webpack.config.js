@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const webpack = require("webpack");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   target: "web",
   entry: {
     "application.production": "./src/index.tsx",
@@ -15,12 +15,12 @@ module.exports = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: "[name].js",
-    library: "App",
+    library: "MyExternal",
     libraryTarget: "umd",
   },
   externals: {
-    react: "commonjs2",
-    "react-dom": "commonjs2",
+    react: "React",
+    "react-dom": "ReactDOM",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],

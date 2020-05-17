@@ -1,0 +1,36 @@
+Arguments: 
+  /Users/kousei_himeno/.nodebrew/node/v12.14.0/bin/node /Users/kousei_himeno/.yarn/bin/yarn.js init
+
+PATH: 
+  /usr/local/opt/gettext/bin:/usr/local/opt/mysql-client/bin:/usr/local/sbin:/Users/kousei_himeno/.nodebrew/current/bin:/Users/kousei_himeno/.yarn/bin:/Users/kousei_himeno/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Applications/Wireshark.app/Contents/MacOS
+
+Yarn version: 
+  1.22.1
+
+Node version: 
+  12.14.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/Users/kousei_himeno/.yarn/lib/cli.js:137003:13)
+      at Interface.emit (events.js:210:5)
+      at Interface._ttyWrite (readline.js:887:16)
+      at ReadStream.onkeypress (readline.js:191:10)
+      at ReadStream.emit (events.js:210:5)
+      at emitKeys (internal/readline/utils.js:433:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1153:36)
+      at ReadStream.emit (events.js:210:5)
+      at addChunk (_stream_readable.js:309:12)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

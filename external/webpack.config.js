@@ -15,12 +15,12 @@ module.exports = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: "[name].js",
-    library: "MyExternal",
-    libraryTarget: "umd",
+    library: "MyExternal", // externalsのvalueの値になる
+    libraryTarget: "umd",  // ブラウザのライブラリとして利用する場合に必要
   },
   externals: {
-    react: "React",
-    "react-dom": "ReactDOM",
+    react: "React",          // 必須
+    "react-dom": "ReactDOM", // 必須
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],

@@ -34,9 +34,9 @@ module.exports = {
     libraryTarget: "umd",
   },
   externals: {
-    react: "React",
-    "react-dom": "ReactDOM",
-    "my-external": "MyExternal",
+    react: "React",              // Reactを別scriptに分離する場合に必須
+    "react-dom": "ReactDOM",     // ReactDOMを別scriptに分離する場合に必須
+    "my-external": "MyExternal", // my-externalを別scriptに分離する場合に必須, my-externalのライブラリ名を右側に記述するびつ用がある
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],

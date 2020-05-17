@@ -6,6 +6,7 @@ const resolvePkg = require("resolve-pkg");
 const express = require("express");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -72,6 +73,10 @@ module.exports = {
         from: config.staticPath,
         to: path.join(".", config.publicPath),
       })),
+    }),
+    isProduction && new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      reportFilename: path.join(__dirname, "./docs/index.html"),
     }),
   ],
   output: {

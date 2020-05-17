@@ -1,14 +1,21 @@
 // @ts-check
 const path = require("path");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+
+const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
-  mode: "development",
+  mode: isProduction ? "production" : "development",
   target: "web",
   entry: {
     "PrivateComponent": "./src/PrivateComponent/index.ts",
     "Component": "./src/Component/index.ts"
   },
   plugins: [
+    isProduction && new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      reportFilename: path.join(__dirname, "./docs/index.html"),
+    }),
   ],
   output: {
     path: path.join(__dirname, "umd"),

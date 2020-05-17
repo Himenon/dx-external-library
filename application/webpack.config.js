@@ -5,20 +5,53 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const resolvePkg = require("resolve-pkg");
 const express = require("express");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+
+const isProduction = process.env.NODE_ENV === "production";
+
+const externalAssets = {
+  react: {
+    name: "React",
+    publicPath: "/scripts/react.js",
+    staticPath: isProduction
+      ? resolvePkg("react/umd/react.production.min.js")
+      : resolvePkg("react/umd/react.development.js"),
+  },
+  "react-dom": {
+    name: "ReactDOM",
+    publicPath: "/scripts/react-dom.js",
+    staticPath: isProduction
+      ? resolvePkg("react-dom/umd/react-dom.production.min.js")
+      : resolvePkg("react-dom/umd/react-dom.development.js"),
+  },
+  "my-external": {
+    name: "MyExternal.Component",
+    publicPath: "/scripts/my-external.js",
+    staticPath: resolvePkg("my-external/umd/Component.js"),
+  },
+  "my-external/PrivateComponent": {
+    name: "MyExternal.PrivateComponent",
+    publicPath: "/scripts/my-external-private.js",
+    staticPath: resolvePkg("my-external/umd/PrivateComponent.js"),
+  },
+};
+
+const entryName = [
+  "application",
+  isProduction ? "production" : "development",
+].join(".");
 
 module.exports = {
-  mode: "development",
+  mode: isProduction ? "production" : "development",
   target: "web",
   entry: {
-    "application.production": "./src/index.tsx",
+    [entryName]: "./src/index.tsx",
   },
   devServer: {
     before: (app) => {
-      app.use("/scripts/react.development.js", express.static(resolvePkg("react/umd/react.development.js")));
-      app.use("/scripts/react-dom.development.js", express.static(resolvePkg("react-dom/umd/react-dom.development.js")));
-      app.use("/scripts/external.js", express.static(resolvePkg("my-external/dist/application.production.js")));
-      app.use("/scripts/my-external.js", express.static(resolvePkg("my-external/umd/Component.js")));
-      app.use("/scripts/my-external-private.js", express.static(resolvePkg("my-external/umd/PrivateComponent.js")));
+      Object.values(externalAssets).forEach((config) => {
+        app.use(config.publicPath, express.static(config.staticPath));
+      });
     },
   },
   plugins: [
@@ -26,28 +59,42 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "public/index.html",
-      React: "/scripts/react.development.js",
-      ReactDOM: "/scripts/react-dom.development.js",
-      MyExternal: "/scripts/my-external.js",
-      "MyExternal.PrivateComponent": "/scripts/my-external-private.js",
+      inject: "head",
+      scriptLoading: "defer",
+      ...Object.values(externalAssets).reduce(
+        (all, current) => ({ ...all, [current.name]: current.publicPath }),
+        {}
+      ),
+    }),
+    new CopyWebpackPlugin({
+      // @ts-ignore
+      patterns: Object.values(externalAssets).map((config) => ({
+        from: config.staticPath,
+        to: path.join(".", config.publicPath),
+      })),
     }),
   ],
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "[name].js"
+    filename: "[name].js",
   },
-  externals: {
-    react: "React",              // Reactを別scriptに分離する場合に必須
-    "react-dom": "ReactDOM",     // ReactDOMを別scriptに分離する場合に必須
-    "my-external": "MyExternal.Component", // my-externalを別scriptに分離する場合に必須, my-externalのライブラリ名を右側に記述するびつ用がある
-    "my-external/PrivateComponent": "MyExternal.PrivateComponent"
-  },
+  externals: Object.keys(externalAssets).reduce(
+    (all, current) => ({
+      ...all,
+      [current]: externalAssets[current].name,
+    }),
+    {}
+  ),
+  // {
+  //   react: "React", // Reactを別scriptに分離する場合に必須
+  //   "react-dom": "ReactDOM", // ReactDOMを別scriptに分離する場合に必須
+  //   "my-external": "MyExternal.Component", // my-externalを別scriptに分離する場合に必須, my-externalのライブラリ名を右側に記述するびつ用がある
+  //   "my-external/PrivateComponent": "MyExternal.PrivateComponent",
+  // },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
   module: {
-    rules: [
-      { test: /\.tsx?$/, loader: "ts-loader" },
-    ],
+    rules: [{ test: /\.tsx?$/, loader: "ts-loader" }],
   },
 };

@@ -5,7 +5,7 @@
   "typings": "./index.d.ts",
   "main": "./index.js",
   "scripts": {
-    "build": "yarn build:webpack && yarn build:dts",
+    "build": "NODE_ENV=production yarn build:webpack && yarn build:dts",
     "build:webpack": "webpack --config webpack.config.js",
     "build:dts": "node ./bundle.js"
   },

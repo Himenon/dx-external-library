@@ -2,11 +2,11 @@
 // Dependencies for this module:
 //   ../../react
 
-declare module 'my-external2' {
-    export * as Panel from "__my-external2/Panel";
+declare module 'my-external/PrivateComponent' {
+    export * as Panel from "__my-external/PrivateComponent/Panel";
 }
 
-declare module '__my-external2/Panel' {
+declare module '__my-external/PrivateComponent/Panel' {
     import * as React from "react";
     export interface Props {
         title: string;

@@ -3,15 +3,15 @@ const dts = require("dts-bundle");
 const path = require("path");
 
 dts.bundle({
-	name: pkg.name + "2",
-  main: path.join(__dirname, "lib/PrivateComponent/index.d.ts"),
-  out: path.join(__dirname, "PrivateComponent.d.ts"),
+	name: pkg.name,
+  main: path.join(__dirname, "lib/Component/index.d.ts"),
+  out: path.join(__dirname, "index.d.ts"),
   prefix: '__',
 });
 
 dts.bundle({
-	name: pkg.name + "2",
-  main: path.join(__dirname, "lib/Component/index.d.ts"),
-  out: path.join(__dirname, "Component.d.ts"),
+	name: path.join(pkg.name, "PrivateComponent"),
+  main: path.join(__dirname, "lib/PrivateComponent/index.d.ts"),
+  out: path.join(__dirname, "PrivateComponent.d.ts"),
   prefix: '__',
 });

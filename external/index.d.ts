@@ -2,11 +2,11 @@
 // Dependencies for this module:
 //   ../../react
 
-declare module 'my-external2' {
-    export * as Board from "__my-external2/Board";
+declare module 'my-external' {
+    export * as Board from "__my-external/Board";
 }
 
-declare module '__my-external2/Board' {
+declare module '__my-external/Board' {
     import * as React from "react";
     export interface Props {
         name: string;

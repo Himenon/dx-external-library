@@ -1,7 +1,5 @@
 // @ts-check
 const path = require("path");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const webpack = require("webpack");
 
 module.exports = {
   mode: "development",
@@ -11,7 +9,6 @@ module.exports = {
     "Component": "./src/Component/index.ts"
   },
   plugins: [
-    new CleanWebpackPlugin(),
   ],
   output: {
     path: path.join(__dirname, "umd"),
